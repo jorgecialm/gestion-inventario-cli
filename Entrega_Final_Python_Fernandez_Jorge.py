@@ -15,4 +15,19 @@ cursor.execute(crear_tabla)
 print("Tabla creada o ya existe")
 
 conexion.commit()
-conexion.close()
+
+
+def crear_producto():
+    nombre=input("Ingresa el nombre del producto : ")
+    descripcion= input("Ingresa a la descripción del producto : ")
+    cantidad=int(input("Ingresar a la cantidad de productos : "))
+    precio = float(input("Ingresa el precio del producto : "))
+    categoria =input("Ingresa la categoría del producto : ")
+
+    insertar="INSERT INTO productos (nombre, descripcion,cantidad,precio,categoria) VALUES (?,?,?,?,?);"
+
+    cursor.execute(insertar,(nombre,descripcion,cantidad,precio,categoria))
+
+    conexion.commit()
+    
+
