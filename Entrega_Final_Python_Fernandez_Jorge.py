@@ -18,6 +18,7 @@ conexion.commit()
 
 
 def crear_producto():
+    """Registrar productos"""
     nombre=input("Ingresa el nombre del producto : ")
     descripcion= input("Ingresa a la descripción del producto : ")
     cantidad=int(input("Ingresar a la cantidad de productos : "))
@@ -31,3 +32,14 @@ def crear_producto():
     conexion.commit()
     
 
+def listar_productos():
+    """Listado de productos"""
+    print("Listado de productos")
+    sql="SELECT * FROM productos;"
+    cursor.execute(sql)
+    productos=cursor.fetchall()
+    for prod in productos:
+        print(f"ID : {prod[0]} | NOMBRE : {prod[1]} | DESCRIPCION : {prod[2]} | CANTIDAD : {prod[3]} | PRECIO : {prod[4]} | CATEGORIA :{prod[5]}")
+    return productos
+
+listar_productos()
