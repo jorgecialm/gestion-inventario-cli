@@ -42,4 +42,14 @@ def listar_productos():
         print(f"ID : {prod[0]} | NOMBRE : {prod[1]} | DESCRIPCION : {prod[2]} | CANTIDAD : {prod[3]} | PRECIO : {prod[4]} | CATEGORIA :{prod[5]}")
     return productos
 
-listar_productos()
+
+def actualizar_productos(id):
+    """Actualiza producto por ID"""
+    print("Actualización de producto")
+    listar_productos()
+    nuevo_precio=float(input("ingresa el nuevo precio : "))
+    nueva_cantidad=int(input("ingresa la nueva cantidad : "))
+    sql="""UPDATE productos SET cantidad=?, precio=? WHERE id=?"""
+    cursor.execute(sql,(nueva_cantidad,nuevo_precio,id))
+    conexion.commit()
+
