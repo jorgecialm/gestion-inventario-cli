@@ -69,3 +69,14 @@ def eliminar_producto(id):
     else:
         print("se canceló la eliminación del producto")
     
+def buscar_producto(id):
+    sql="""SELECT * FROM productos WHERE id = ?;"""
+    cursor.execute(sql,(id,))
+    resultado=cursor.fetchone()
+    if resultado== None:
+        print("no se encontró ningún registro")
+    else:
+        print("producto encontrado")
+        print(f"ID : {resultado[0]} | NOMBRE : {resultado[1]} | DESCRIPCION : {resultado[2]} | CANTIDAD : {resultado[3]} | PRECIO : {resultado[4]} | CATEGORIA :{resultado[5]}")
+    
+buscar_producto(2)
