@@ -53,3 +53,19 @@ def actualizar_productos(id):
     cursor.execute(sql,(nueva_cantidad,nuevo_precio,id))
     conexion.commit()
 
+def eliminar_producto(id):
+    """Eliminacion de producto por id"""
+    listar_productos()
+    sql="""DELETE FROM productos WHERE id=?;"""
+    respuesta=input("¿Está seguro que desea eliminar el producto si/no?")
+    if respuesta =="si":
+        cursor.execute(sql,(id,))
+        cantidad_borrada=cursor.rowcount
+        conexion.commit()
+        if cantidad_borrada== 0:
+            print("No se encontró ningún registro para borrar")
+        else:
+            print("El registro seleccionado fue borrado.")
+    else:
+        print("se canceló la eliminación del producto")
+    
