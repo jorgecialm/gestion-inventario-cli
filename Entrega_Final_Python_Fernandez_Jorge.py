@@ -41,7 +41,7 @@ def listar_productos():
     productos = cursor.fetchall()
     for prod in productos:
         print(
-            f"ID : {prod[0]} | NOMBRE : {prod[1]} | DESCRIPCION : {prod[2]} | CANTIDAD : {prod[3]} | PRECIO : {prod[4]} | CATEGORIA :{prod[5]}"
+            f"ID : {prod[0]:<2} | NOMBRE : {prod[1]:<10} | DESCRIPCION : {prod[2]:<15} | CANTIDAD : {prod[3]:<2} | PRECIO : {prod[4]:<6} | CATEGORIA :{prod[5]}"
         )
     return productos
 
@@ -83,7 +83,7 @@ def buscar_producto(id):
     else:
         print("producto encontrado")
         print(
-            f"ID : {resultado[0]} | NOMBRE : {resultado[1]} | DESCRIPCION : {resultado[2]} | CANTIDAD : {resultado[3]} | PRECIO : {resultado[4]} | CATEGORIA :{resultado[5]}"
+            f"ID : {resultado[0]:<2} | NOMBRE : {resultado[1]:<10} | DESCRIPCION : {resultado[2]:<15} | CANTIDAD : {resultado[3]:<2} | PRECIO : {resultado[4]:<6} | CATEGORIA :{resultado[5]}"
         )
 
 
@@ -102,6 +102,20 @@ def buscar_extendido(campo, valor):
         print("producto encontrado")
         for fila in resultado:
             print(
-                f"ID : {fila[0]} | NOMBRE : {fila[1]} | DESCRIPCION : {fila[2]} | CANTIDAD : {fila[3]} | PRECIO : {fila[4]} | CATEGORIA :{fila[5]}"
+                f"ID : {fila[0]:<2} | NOMBRE : {fila[1]:<10} | DESCRIPCION : {fila[2]:<15} | CANTIDAD : {fila[3]:<2} | PRECIO : {fila[4]:<6} | CATEGORIA :{fila[5]}"
             )
 
+def reporte_stock_bajo(limite):
+    sql="""SELECT * FROM productos WHERE cantidad <= ?"""
+    cursor.execute(sql,(limite,))
+    resultado = cursor.fetchall()
+    if resultado == []:
+        print("no se encontró ningún registro")
+    else:
+        print("producto encontrado")
+        for fila in resultado:
+            print(
+                f"ID : {fila[0]:<2} | NOMBRE : {fila[1]:<10} | DESCRIPCION : {fila[2]:<15} | CANTIDAD : {fila[3]:<2} | PRECIO : {fila[4]:<6} | CATEGORIA :{fila[5]}"
+            )
+
+reporte_stock_bajo(5)
